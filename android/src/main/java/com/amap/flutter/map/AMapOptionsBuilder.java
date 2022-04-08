@@ -85,10 +85,10 @@ class AMapOptionsBuilder implements AMapOptionsSink {
             aMapPlatformView.getMapController().setLabelsEnabled(labelsEnabled);
 
 
-//            if (null != initialClusters) {
-//                List<Object> clusterList = (List<Object>) initialClusters;
-//                aMapPlatformView.getClusterController().addByList(clusterList);
-//            }
+            if (null != initialClusters) {
+                List<Object> clusterList = (List<Object>) initialClusters;
+                aMapPlatformView.getClusterController().addByList(clusterList);
+            }
 
             if (null != initialMarkers) {
                 List<Object> markerList = (List<Object>) initialMarkers;
