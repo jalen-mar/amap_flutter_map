@@ -32,7 +32,7 @@ public class MovingMarker extends MovingPointOverlay implements MovingPointOverl
         super.setPoints(currentPoints);
         currentPoints = new LinkedList<>(currentPoints);
         currentPoints.remove(0);
-        super.setTotalDuration(Math.max(i, 1000) / 1000);
+        super.setTotalDuration(i);
     }
 
     @Override

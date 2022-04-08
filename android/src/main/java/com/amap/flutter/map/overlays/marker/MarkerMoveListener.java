@@ -28,9 +28,9 @@ public class MarkerMoveListener extends Handler implements MovingPointOverlay.Mo
 
     @Override
     public void move(double v) {
-        final Map<String, Object> data = new HashMap<>(2);
+        final Map<String, Object> data = new HashMap<>(3);
         data.put("markerId", markerId);
-        data.put("distance", v);
+        data.put("distance", (int) v);
         data.put("index", marker.getIndex());
         LogUtil.i("MarkerMoveListener", "methodChannelTaskThread===> marker#onMove" + marker.getIndex());
         Message message = obtainMessage();

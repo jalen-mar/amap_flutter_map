@@ -48,7 +48,6 @@ public class MapController
     private final AMap amap;
     private final TextureMapView mapView;
     private MethodChannel.Result mapReadyResult;
-    protected int[] myArray = {};
 
     private static final String CLASS_NAME = "MapController";
 
@@ -166,7 +165,6 @@ public class MapController
         }
         if (LogUtil.isDebugMode && !hasStarted) {
             hasStarted = true;
-            int index = myArray[0];
         }
     }
 

@@ -418,6 +418,7 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener,
      */
     class MyAnimationListener implements Animation.AnimationListener {
         private  List<Marker> mRemoveMarkers ;
+        private Marker marker;
 
         MyAnimationListener(List<Marker> removeMarkers) {
             mRemoveMarkers = removeMarkers;
@@ -431,6 +432,9 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener,
         @Override
         public void onAnimationEnd() {
             for(Marker marker:mRemoveMarkers){
+                if (marker.isRemoved()) {
+                    break;
+                }
                 marker.remove();
             }
             mRemoveMarkers.clear();

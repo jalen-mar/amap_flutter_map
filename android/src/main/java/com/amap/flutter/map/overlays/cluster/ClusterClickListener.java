@@ -8,7 +8,6 @@ public interface ClusterClickListener {
      *
      * @param marker
      *            点击的聚合点
-     * @param clusterItems
      *            聚合点所包含的元素
      */
     public void onClick(Marker marker, Cluster cluster);

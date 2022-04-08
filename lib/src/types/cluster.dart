@@ -19,7 +19,7 @@ class ClusterItem extends BaseOverlay {
   })  : super();
 
   /// 覆盖物的图标
-  final BitmapDescriptor icon;
+  BitmapDescriptor icon;
 
   /// 位置,不能为空
   final LatLng position;

@@ -131,7 +131,7 @@ public class MarkersController
         if (markerId != null) {
             MovingPointOverlay overlay = movableMarkers.get(markerId);
             if (overlay != null) {
-                ((MovingMarker) overlay).changeTotalDuration(ConvertUtil.toInt(methodCall.argument("duration")));
+                ((MovingMarker) overlay).changeTotalDuration(Math.max(1, ConvertUtil.toInt(methodCall.argument("duration"))));
             }
         }
         result.success(null);
@@ -179,7 +179,7 @@ public class MarkersController
             Marker marker = amap.addMarker(markerOptions);
             if (ConvertUtil.toBoolean(markerData.get("movable"))){
                 MovingPointOverlay movableMarker = new MovingMarker(amap, marker);
-                movableMarker.setTotalDuration(ConvertUtil.toInt(markerData.get("duration")));
+                movableMarker.setTotalDuration(Math.max(ConvertUtil.toInt(markerData.get("duration")), 1));
                 movableMarker.setPoints(ConvertUtil.toPoints(markerData.get("track")));
                 movableMarkers.put(dartMarkerId, movableMarker);
                 movableMarker.setMoveListener(new MarkerMoveListener(methodChannel, dartMarkerId, movableMarker));
