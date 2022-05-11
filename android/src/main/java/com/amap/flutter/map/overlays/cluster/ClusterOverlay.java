@@ -206,11 +206,15 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener,
 
     }
 
+    private float zoom = 0;
     @Override
     public void onCameraChangeFinish(CameraPosition arg0) {
-        mPXInMeters = mAMap.getScalePerPixel();
-        mClusterDistance = mPXInMeters * mClusterSize;
-        assignClusters();
+        if (zoom != arg0.zoom) {
+            zoom = arg0.zoom;
+            mPXInMeters = mAMap.getScalePerPixel();
+            mClusterDistance = mPXInMeters * mClusterSize;
+            assignClusters();
+        }
     }
 
     //点击事件

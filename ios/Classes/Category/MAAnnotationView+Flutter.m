@@ -28,7 +28,7 @@
     self.enabled = marker.clickable;
     self.draggable = marker.draggable;
     //    marker.flat;//flat属性，iOS暂时不开
-    self.canShowCallout = marker.infoWindowEnable;
+    self.canShowCallout = NO;//marker.infoWindowEnable;
 //    TODO: 气泡的锚点，由于iOS中的气泡，区分默认气泡和自定义气泡，且无法获得气泡的大小，所以没法将其锚点转换为calloutOffset
     //    self.calloutOffset = marker.infoWindow.anchor;
     //角度旋转

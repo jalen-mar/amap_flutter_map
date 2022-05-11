@@ -33,6 +33,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.amap.api:3dmap:8.1.0'
+    compileOnly 'com.amap.api:3dmap:9.2.0'
 }
 
