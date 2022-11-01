@@ -21,6 +21,7 @@ import com.amap.flutter.map.utils.Const;
 import com.amap.flutter.map.utils.ConvertUtil;
 import com.amap.flutter.map.utils.LogUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,12 +83,14 @@ public class ClusterController implements MyMethodCallHandler, ClusterRender, Cl
 
     public void addByList(List<Object> clusterList) {
         if (clusterList != null) {
+            Map<String, ClusterItem> items = new HashMap<>();
             for (Object clusterObj : clusterList) {
                 ClusterItem clusterItem = createClusterItem(clusterObj);
                 if (clusterItem != null) {
-                    clusterOverlay.addClusterItem(clusterItem);
+                    items.put(clusterItem.getId(), clusterItem);
                 }
             }
+            clusterOverlay.addClusterItem(items);
         }
     }
 
@@ -125,13 +128,18 @@ public class ClusterController implements MyMethodCallHandler, ClusterRender, Cl
 
     private void updateByList(List<Object> clustersToChange) {
         if (clustersToChange != null) {
+            Map<String, ClusterItem> items = new HashMap<>();
             for (Object clusterToChange : clustersToChange) {
-                update(clusterToChange);
+                ClusterItem clusterItem = update(clusterToChange);
+                if (clusterItem != null) {
+                    items.put(clusterItem.getId(),clusterItem);
+                }
             }
+            clusterOverlay.addClusterItem(items);
         }
     }
 
-    private void update(Object clusterToChange) {
+    private ClusterItem update(Object clusterToChange) {
         if (clusterToChange != null) {
             RegionItem regionItem = new RegionItem();
 
@@ -140,31 +148,32 @@ public class ClusterController implements MyMethodCallHandler, ClusterRender, Cl
             if (id != null) {
                 regionItem.setId(ConvertUtil.toString(id));
             } else {
-                return;
+                return null;
             }
             final Object icon = clusterData.get("icon");
             if (icon != null) {
                 regionItem.setIcon(ConvertUtil.toBitmapDescriptor(icon));
             } else {
-                return;
+                return null;
             }
             final Object position = clusterData.get("position");
             if (position != null) {
                 regionItem.setPosition(ConvertUtil.toLatLng(position));
             } else {
-                return;
+                return null;
             }
             final Object rotation = clusterData.get("rotation");
             if (rotation != null) {
                 regionItem.setRotation(ConvertUtil.toFloat(rotation));
             }
-            clusterOverlay.addClusterItem(regionItem);
+            return regionItem;
         }
+        return null;
     }
 
     @Override
     public Drawable getDrawAble(int clusterNum) {
-        int radius = 150;
+        int radius = 200;
         if (clusterNum < 10) {
 
             Drawable bitmapDrawable = mBackDrawAbles.get(2);
@@ -257,7 +266,7 @@ public class ClusterController implements MyMethodCallHandler, ClusterRender, Cl
                 builder.include(clusterItem.getPosition());
             }
             LatLngBounds latLngBounds = builder.build();
-            amap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 200));
+            amap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 150));
         }
     }
 
